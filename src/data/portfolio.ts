@@ -4,6 +4,7 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
+  tag: string; // short category shown on cards and detail pages
   description: string[];
   role: string;
   year: string;
@@ -23,9 +24,10 @@ export const profile = {
   location: "Lahore, Pakistan",
   bio: "I build web applications and AI systems — Flask and FastAPI backends, React frontends, RAG pipelines over private docs, and MCP tool servers that let LLM clients drive real systems.",
   email: "nomi66623@gmail.com",
-  github: "https://github.com/Dev-Abdulrehman1",
-  githubHandle: "Dev-Abdulrehman1",
-  avatar: "https://avatars.githubusercontent.com/u/259087494?v=4",
+  github: "https://github.com/shad0wbitt",
+  githubHandle: "shad0wbitt",
+  avatar: "/github-avatar.jpg",
+  heroArt: "/purple-swirl.jpg",
 };
 
 export const skills = [
@@ -45,6 +47,7 @@ const publicProjects: Project[] = [
   {
     slug: "roomkit",
     title: "Roomkit",
+    tag: "AI, product",
     tagline: "Drop a colour on a wall and get the room back, repainted",
     description: [
       "Roomkit takes a photo of a room and repaints the walls you pick. Drop a colour on a wall, press Render, and roughly a minute later the same room comes back in that colour — furniture, window light, perspective and shadows untouched.",
@@ -70,15 +73,16 @@ const publicProjects: Project[] = [
       "Access-key gate with a 30-day cookie on the endpoint that costs money",
       "Same-origin /api rewrite keeps the Python origin out of the browser",
     ],
-    repoUrl: "https://github.com/Dev-Abdulrehman1/Roomkit",
+    repoUrl: "https://github.com/shad0wbitt/Roomkit",
     liveUrl: "https://roomkit.scriptro.com",
     accent: "from-orange-400/40 via-rose-500/20 to-amber-300/30",
-    image: "/projects/roomkit.svg",
+    image: "/images/roomkit.jpg",
     featured: true,
   },
   {
     slug: "voice-engine",
     title: "Voice Engine",
+    tag: "AI, audio",
     tagline: "Turn a script into natural speech, straight from the browser",
     description: [
       "A text-to-speech app: paste a script, press Generate, and the audio plays in the page a few seconds later. Every generation is kept in a local history you can replay or delete.",
@@ -95,32 +99,33 @@ const publicProjects: Project[] = [
       "Failed runs kept with the provider's error message for real debugging",
       "Access-key gate on every route; the app refuses to start without it",
     ],
-    repoUrl: "https://github.com/Dev-Abdulrehman1/VOICE-ENGINE",
+    repoUrl: "https://github.com/shad0wbitt/VOICE-ENGINE",
     accent: "from-emerald-400/40 via-teal-500/20 to-cyan-300/30",
-    image: "/projects/voice-engine.svg",
+    image: "/images/voice-engine.jpg",
     featured: true,
   },
   {
     slug: "ai-studio-site",
     title: "AI Studio Site",
-    tagline: "This cinematic portfolio — React, Vite & Tailwind",
+    tag: "Website, design",
+    tagline: "This portfolio — an editorial React build",
     description: [
-      "The site you're looking at: a multi-page portfolio with a cinematic full-width CTA, video backgrounds, and liquid glassmorphism UI built from scratch.",
-      "Every page shares the black-and-white design language — Instrument Serif italics for voice, Barlow for everything else, and glass surfaces with gradient borders rendered via a mask-composite trick.",
-      "The hero streams an MP4 background with graceful top/bottom fades so media dissolves into the page instead of ending at a hard edge.",
+      "The site you're looking at: a multi-page portfolio rebuilt around an editorial design system — oversized type, a rotating portrait aperture, and surfaces that shift from near-black to lavender as you scroll.",
+      "Every page shares one language: Gabarito for display, Onest for body, a single purple accent, 28px surfaces and badges, and hairline rules instead of borders. The design follows the free Onda template by 8B, rebuilt in React, Vite and Tailwind.",
+      "Motion is deliberately light: a CSS-only hero entrance, an IntersectionObserver reveal pass, and a scroll-driven progress ring that makes the process legible instead of decorative.",
     ],
     role: "Solo developer",
     year: "2026",
     stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router"],
     features: [
       "Multi-page routing with project detail pages",
-      "Liquid glass buttons with gradient pseudo-element borders",
-      "Full-bleed video background with edge fades",
-      "Responsive typography from mobile to desktop",
-      "Fully typed with strict TypeScript",
+      "Editorial type system and lavender surfaces",
+      "Scroll-reveal motion with reduced-motion fallbacks",
+      "Rotating hero and footer portrait apertures",
+      "Sticky method ring driven by scroll progress",
     ],
     accent: "from-violet-400/40 via-fuchsia-500/20 to-pink-300/30",
-    image: "/projects/ai-studio-site.svg",
+    image: "/images/ai-studio-site.jpg",
     featured: true,
   },
 ];
@@ -135,6 +140,7 @@ export type Service = {
   short: string; // one-liner for cards/teasers
   description: string;
   deliverables: string[];
+  tags: string[];
   icon: "workflow" | "chat" | "data" | "agents";
 };
 
@@ -142,6 +148,7 @@ export const services: Service[] = [
   {
     slug: "workflow-automation",
     title: "Workflow Automation",
+    tags: ["Audits", "Scripts", "Integrations", "Alerts"],
     short:
       "Replace the copy-paste routine — scripts and integrations that run your repetitive work for you.",
     description:
@@ -158,6 +165,7 @@ export const services: Service[] = [
   {
     slug: "ai-chatbots",
     title: "AI Chatbots & Assistants",
+    tags: ["RAG", "MCP", "Chat UI", "Guardrails"],
     short:
       "Support and internal assistants grounded in your own docs, not generic answers.",
     description:
@@ -175,6 +183,7 @@ export const services: Service[] = [
   {
     slug: "data-pipelines",
     title: "Data Collection & Pipelines",
+    tags: ["Scrapers", "ETL", "SQL", "Scheduling"],
     short:
       "Scrapers, ETL jobs, and clean datasets delivered on a schedule.",
     description:
@@ -191,6 +200,7 @@ export const services: Service[] = [
   {
     slug: "ai-agents",
     title: "AI Agents & Internal Tools",
+    tags: ["Agents", "Tool use", "Dashboards", "Review"],
     short:
       "Multi-step AI agents paired with small tools your team uses daily.",
     description:

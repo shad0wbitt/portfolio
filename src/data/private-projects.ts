@@ -7,6 +7,7 @@ export const privateProjects: Project[] = [
   {
     slug: "support-inbox-automation",
     title: "Support Inbox Automation",
+    tag: "RAG, support",
     tagline: "RAG-backed triage layered on top of a shared support inbox",
     description: [
       "A production support desk where every incoming conversation is classified, summarised, and drafted before an agent opens it.",
@@ -24,13 +25,14 @@ export const privateProjects: Project[] = [
       "Analytics on the questions customers actually ask",
     ],
     accent: "from-sky-400/40 via-indigo-500/20 to-violet-300/30",
-    image: "/projects/support-inbox-automation.svg",
+    image: "/images/support-inbox.jpg",
     featured: true,
     private: true,
   },
   {
     slug: "mcp-tool-server",
     title: "MCP Tool Server",
+    tag: "AI, infrastructure",
     tagline: "One tool layer that any LLM client can call — no vendor lock-in",
     description: [
       "An MCP server that exposes a company's internal systems — customer records, orders, inventory, and reporting — as typed tools an LLM client can call.",
@@ -48,12 +50,13 @@ export const privateProjects: Project[] = [
       "Transport options (stdio and HTTP) behind one codebase",
     ],
     accent: "from-cyan-400/40 via-sky-500/20 to-blue-300/30",
-    image: "/projects/mcp-tool-server.svg",
+    image: "/images/mcp-server.jpg",
     private: true,
   },
   {
     slug: "docs-rag-assistant",
     title: "Docs RAG Assistant",
+    tag: "RAG, search",
     tagline: "Answers from 4,000 pages of internal documentation, with citations",
     description: [
       "An internal assistant that answers policy and product questions from a large documentation set, quoting the exact passages it used.",
@@ -71,12 +74,13 @@ export const privateProjects: Project[] = [
       "Answer quality review queue for the docs team",
     ],
     accent: "from-indigo-400/40 via-violet-500/20 to-fuchsia-300/30",
-    image: "/projects/rag-assistant.svg",
+    image: "/images/rag-docs.jpg",
     private: true,
   },
   {
     slug: "logistics-client-portal",
     title: "Logistics Client Portal",
+    tag: "Product, portal",
     tagline: "Shipment tracking and document exchange for a freight operator",
     description: [
       "A client-facing portal replacing a daily flood of status emails. Each customer signs in and sees only their own shipments, documents, and invoices.",
@@ -93,12 +97,13 @@ export const privateProjects: Project[] = [
       "Email notifications on status changes",
     ],
     accent: "from-teal-400/40 via-emerald-500/20 to-lime-300/30",
-    image: "/projects/logistics-client-portal.svg",
+    image: "/images/logistics.jpg",
     private: true,
   },
   {
     slug: "invoice-reconciliation",
     title: "Invoice Reconciliation Pipeline",
+    tag: "Automation, finance",
     tagline: "Reads supplier invoices and reconciles them against the ledger",
     description: [
       "A scheduled pipeline that ingests supplier invoices, extracts the line items, and matches them against purchase orders and payments.",
@@ -115,7 +120,7 @@ export const privateProjects: Project[] = [
       "Monthly reconciliation summary exports",
     ],
     accent: "from-rose-400/40 via-orange-500/20 to-amber-300/30",
-    image: "/projects/invoice-reconciliation.svg",
+    image: "/images/invoice.jpg",
     private: true,
   },
 ];
