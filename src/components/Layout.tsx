@@ -1,21 +1,35 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-};
+import SiteFooter from "./SiteFooter";
+import { useReveal } from "../hooks/useReveal";
+import { useSmoothScroll } from "../hooks/useMotion";
 
 const Layout = () => {
+  const { pathname, hash } = useLocation();
+  useReveal();
+  useSmoothScroll();
+
+  useEffect(() => {
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        requestAnimationFrame(() =>
+          target.scrollIntoView({ behavior: "smooth", block: "start" })
+        );
+      }
+      return;
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      <ScrollToTop />
+    <div className="site">
       <Navbar />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
+      <SiteFooter />
     </div>
   );
 };

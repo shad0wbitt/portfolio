@@ -4,6 +4,7 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
+  tag: string; // short category shown on cards and detail pages
   description: string[];
   role: string;
   year: string;
@@ -23,9 +24,10 @@ export const profile = {
   location: "Lahore, Pakistan",
   bio: "I build web applications and AI systems — Flask and FastAPI backends, React frontends, RAG pipelines over private docs, and MCP tool servers that let LLM clients drive real systems.",
   email: "nomi66623@gmail.com",
-  github: "https://github.com/Dev-Abdulrehman1",
-  githubHandle: "Dev-Abdulrehman1",
-  avatar: "https://avatars.githubusercontent.com/u/259087494?v=4",
+  github: "https://github.com/shad0wbitt",
+  githubHandle: "shad0wbitt",
+  avatar: "/github-avatar.jpg",
+  heroArt: "/purple-swirl.jpg",
 };
 
 export const skills = [
@@ -45,6 +47,7 @@ const publicProjects: Project[] = [
   {
     slug: "roomkit",
     title: "Roomkit",
+    tag: "AI, product",
     tagline: "Drop a colour on a wall and get the room back, repainted",
     description: [
       "Roomkit takes a photo of a room and repaints the walls you pick. Drop a colour on a wall, press Render, and roughly a minute later the same room comes back in that colour — furniture, window light, perspective and shadows untouched.",
@@ -70,20 +73,23 @@ const publicProjects: Project[] = [
       "Access-key gate with a 30-day cookie on the endpoint that costs money",
       "Same-origin /api rewrite keeps the Python origin out of the browser",
     ],
-    repoUrl: "https://github.com/Dev-Abdulrehman1/Roomkit",
     liveUrl: "https://roomkit.scriptro.com",
     accent: "from-orange-400/40 via-rose-500/20 to-amber-300/30",
-    image: "/projects/roomkit.svg",
+    image: "/images/roomkit.jpg",
     featured: true,
   },
   {
     slug: "voice-engine",
     title: "Voice Engine",
+    tag: "AI, audio",
     tagline: "Turn a script into natural speech, straight from the browser",
     description: [
       "A text-to-speech app: paste a script, press Generate, and the audio plays in the page a few seconds later. Every generation is kept in a local history you can replay or delete.",
       "The backend is FastAPI calling OpenRouter's speech endpoint (Fish Audio s2.1-pro), which returns raw mp3 bytes that get written to disk and streamed back to the browser as a blob.",
       "History lives in SQLite through Python's standard library — no ORM, no migration tooling, and no build step for the frontend. Every API route requires the access key from .env, and failed generations are stored too, with the provider's error message, so breakage stays visible instead of silent.",
+      "Cost and failure are part of the interface rather than an afterthought: each generation records how long the round trip took and how large the resulting file is, and a failed run keeps the provider's message instead of disappearing from the list. The frontend is plain JavaScript against a handful of JSON routes, so the whole app can be read in an afternoon — which matters more than a framework when the person maintaining it may be you.",
+      "Routing is deliberately boring: one POST creates the audio, one GET streams it back, and the page never holds a provider credential. Because the mp3 is written to disk before it is served, a reload replays the same file instead of generating — and billing — a second time. Deleting a generation removes the row and the file together, so the history does not grow into a directory nobody can reconcile.",
+      "Generation is capped per run and the key is checked on every route, which keeps a public page from turning into an open invoice. The UI shows the request in flight, the file size when it lands, and a plain error when the provider refuses — three states that are easy to skip and expensive to debug later.",
     ],
     role: "Solo developer",
     year: "2026",
@@ -95,32 +101,36 @@ const publicProjects: Project[] = [
       "Failed runs kept with the provider's error message for real debugging",
       "Access-key gate on every route; the app refuses to start without it",
     ],
-    repoUrl: "https://github.com/Dev-Abdulrehman1/VOICE-ENGINE",
+    repoUrl: "https://github.com/shad0wbitt/VOICE-ENGINE",
     accent: "from-emerald-400/40 via-teal-500/20 to-cyan-300/30",
-    image: "/projects/voice-engine.svg",
+    image: "/images/voice-engine.jpg",
     featured: true,
   },
   {
     slug: "ai-studio-site",
     title: "AI Studio Site",
-    tagline: "This cinematic portfolio — React, Vite & Tailwind",
+    tag: "Website, design",
+    tagline: "This portfolio — an editorial React build",
     description: [
-      "The site you're looking at: a multi-page portfolio with a cinematic full-width CTA, video backgrounds, and liquid glassmorphism UI built from scratch.",
-      "Every page shares the black-and-white design language — Instrument Serif italics for voice, Barlow for everything else, and glass surfaces with gradient borders rendered via a mask-composite trick.",
-      "The hero streams an MP4 background with graceful top/bottom fades so media dissolves into the page instead of ending at a hard edge.",
+      "The site you're looking at: a multi-page portfolio rebuilt around an editorial design system — oversized type, a rotating portrait aperture, and surfaces that shift from near-black to lavender as you scroll.",
+      "Every page shares one language: Gabarito for display, Onest for body, a single purple accent, 28px surfaces and badges, and hairline rules instead of borders. The design follows the free Onda template by 8B, rebuilt in React, Vite and Tailwind.",
+      "Motion is deliberately light: a CSS-only hero entrance, an IntersectionObserver reveal pass, and a scroll-driven progress ring that makes the process legible instead of decorative.",
+      "The build is deliberately small: one React tree, a typed data file per collection, and Tailwind classes composed into a short list of components — card, badge, section head, method ring. Project copy lives in those data files, so adding a case study is a data edit rather than a layout change, and every page renders from the same typography and spacing scale. Fonts load once with display swap, imagery sits in fixed-ratio frames so the layout does not jump, and the reveal pass is skipped entirely when the visitor prefers reduced motion.",
+      "Case studies are the point of the redesign: each project page answers what the thing is, what decisions shaped it, and what it runs on, in the same order every time. The layout is a single column on phones and a two-column grid on wide screens, and the aside carries the stack and the links, so the reading order stays logical even when the grid changes. Nothing is fetched from a CMS, which keeps the site fast and the content honest — it ships when the code does.",
+      "The private work is published without client names: the problem and the decisions are real, the specifics are removed, and each card says plainly that it is an NDA engagement. That is a deliberate trade — a portfolio that overstates access is worse than one that describes the shape of the work.",
     ],
     role: "Solo developer",
     year: "2026",
     stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router"],
     features: [
       "Multi-page routing with project detail pages",
-      "Liquid glass buttons with gradient pseudo-element borders",
-      "Full-bleed video background with edge fades",
-      "Responsive typography from mobile to desktop",
-      "Fully typed with strict TypeScript",
+      "Editorial type system and lavender surfaces",
+      "Scroll-reveal motion with reduced-motion fallbacks",
+      "Rotating hero and footer portrait apertures",
+      "Sticky method ring driven by scroll progress",
     ],
     accent: "from-violet-400/40 via-fuchsia-500/20 to-pink-300/30",
-    image: "/projects/ai-studio-site.svg",
+    image: "/images/ai-studio-site.jpg",
     featured: true,
   },
 ];
@@ -135,6 +145,7 @@ export type Service = {
   short: string; // one-liner for cards/teasers
   description: string;
   deliverables: string[];
+  tags: string[];
   icon: "workflow" | "chat" | "data" | "agents";
 };
 
@@ -142,6 +153,7 @@ export const services: Service[] = [
   {
     slug: "workflow-automation",
     title: "Workflow Automation",
+    tags: ["Audits", "Scripts", "Integrations", "Alerts"],
     short:
       "Replace the copy-paste routine — scripts and integrations that run your repetitive work for you.",
     description:
@@ -158,6 +170,7 @@ export const services: Service[] = [
   {
     slug: "ai-chatbots",
     title: "AI Chatbots & Assistants",
+    tags: ["RAG", "MCP", "Chat UI", "Guardrails"],
     short:
       "Support and internal assistants grounded in your own docs, not generic answers.",
     description:
@@ -175,6 +188,7 @@ export const services: Service[] = [
   {
     slug: "data-pipelines",
     title: "Data Collection & Pipelines",
+    tags: ["Scrapers", "ETL", "SQL", "Scheduling"],
     short:
       "Scrapers, ETL jobs, and clean datasets delivered on a schedule.",
     description:
@@ -191,6 +205,7 @@ export const services: Service[] = [
   {
     slug: "ai-agents",
     title: "AI Agents & Internal Tools",
+    tags: ["Agents", "Tool use", "Dashboards", "Review"],
     short:
       "Multi-step AI agents paired with small tools your team uses daily.",
     description:
