@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -6,10 +7,52 @@ import {
   Lock,
 } from "lucide-react";
 import { profile, projects } from "../data/portfolio";
+import { SITE_URL, useSeo } from "../lib/seo";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
   const project = projects.find((item) => item.slug === slug);
+
+  // Hooks run before the early return: a route change must not skip them.
+  const heroImage = project?.image;
+  useEffect(() => {
+    if (!heroImage) return;
+    const preload = document.createElement("link");
+    preload.rel = "preload";
+    preload.as = "image";
+    preload.href = heroImage;
+    preload.setAttribute("fetchpriority", "high");
+    document.head.appendChild(preload);
+    return () => preload.remove();
+  }, [heroImage]);
+
+  useSeo({
+    title: project ? `${project.title} — ${project.tag} | shad0wbitt` : "Work | shad0wbitt",
+    description: project
+      ? `${project.tagline}. ${project.role}, ${project.year}. Built with ${project.stack.join(", ")}.`
+      : "Public launches and client engagements by shad0wbitt.",
+    path: `/work/${slug ?? ""}`,
+    image: project?.image ?? "/purple-swirl.jpg",
+    type: "article",
+    jsonLd: project
+      ? {
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          headline: project.tagline,
+          description: project.description[0],
+          url: `${SITE_URL}/work/${project.slug}`,
+          dateCreated: project.year,
+          keywords: project.stack.join(", "),
+          creator: {
+            "@type": "Person",
+            name: "Abdul Rehman",
+            alternateName: "shad0wbitt",
+            url: SITE_URL,
+          },
+        }
+      : undefined,
+  });
 
   if (!project) return <Navigate to="/work" replace />;
 
@@ -42,7 +85,14 @@ const ProjectDetail = () => {
         <p className="detail-tagline">{project.tagline}</p>
 
         <div className="detail-hero">
-          {project.image && <img src={project.image} alt="" />}
+          {project.image && (
+            <img
+              src={project.image}
+              alt={`${project.title}: ${project.tagline}`}
+              fetchPriority="high"
+              decoding="async"
+            />
+          )}
         </div>
 
         <div className="detail-grid">

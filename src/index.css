@@ -2441,3 +2441,16 @@ select.field {
 .motion-live .footer-grid[data-reveal] {
   --delay: 120ms;
 }
+
+/* Text for screen readers and crawlers that a visual layout does not need. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

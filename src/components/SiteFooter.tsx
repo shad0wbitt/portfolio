@@ -11,8 +11,11 @@ const SiteFooter = () => {
             <img
               className="footer-img"
               src={profile.heroArt}
-              alt=""
+              alt="Purple abstract swirl artwork closing the page"
+              width={1200}
+              height={1200}
               loading="lazy"
+              decoding="async"
             />
           </span>
         </span>

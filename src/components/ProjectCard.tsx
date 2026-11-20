@@ -9,7 +9,12 @@ const ProjectCard = ({ project }: { project: Project }) => (
   >
     <span className="case-media">
       {project.image && (
-        <img src={project.image} alt="" loading="lazy" />
+        <img
+          src={project.image}
+          alt={`${project.title} — ${project.tagline}`}
+          loading="lazy"
+          decoding="async"
+        />
       )}
     </span>
     <span className="badge case-tag">{project.tag}</span>

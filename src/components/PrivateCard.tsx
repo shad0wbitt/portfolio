@@ -8,7 +8,14 @@ const PrivateCard = ({ project }: { project: Project }) => (
     className="nda-card"
     data-reveal="iris"
   >
-    {project.image && <img src={project.image} alt="" loading="lazy" />}
+    {project.image && (
+      <img
+        src={project.image}
+        alt={`${project.title} — ${project.tagline}`}
+        loading="lazy"
+        decoding="async"
+      />
+    )}
     <span className="badge nda-year">
       <Lock size={11} aria-hidden="true" />
       {project.year}

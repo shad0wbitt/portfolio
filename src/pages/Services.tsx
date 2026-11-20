@@ -2,8 +2,16 @@ import Capabilities from "../components/Capabilities";
 import Method from "../components/Method";
 import Faq from "../components/Faq";
 import CtaBand from "../components/CtaBand";
+import { useSeo } from "../lib/seo";
 
 const Services = () => {
+  useSeo({
+    title: "Services — automation, AI assistants, pipelines and agents | shad0wbitt",
+    description:
+      "Workflow automation, AI assistants grounded in your own documents, data pipelines and internal agents — built with Python, FastAPI, React, RAG and MCP.",
+    path: "/services",
+  });
+
   return (
     <>
       <section className="page-head">

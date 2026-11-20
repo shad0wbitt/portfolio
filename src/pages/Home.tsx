@@ -8,6 +8,7 @@ import Faq from "../components/Faq";
 import ContactSection from "../components/ContactSection";
 import { profile, projects } from "../data/portfolio";
 import { useHomeMotion } from "../hooks/useMotion";
+import { homeSchema, useSeo } from "../lib/seo";
 
 const publicProjects = projects.filter((project) => !project.private);
 const privateProjects = projects.filter((project) => project.private);
@@ -23,11 +24,11 @@ const indexLinks = [
 
 const repos = [
   {
-    meta: "Repository · Next.js · 2026",
+    meta: "Live site · Next.js · 2026",
     title: "Roomkit",
     text: "Repaint a room's walls from one photo. FastAPI, OpenRouter and SQLite behind a Next.js frontend.",
-    href: "https://github.com/shad0wbitt/Roomkit",
-    label: "github.com/shad0wbitt/Roomkit",
+    href: "https://roomkit.scriptro.com",
+    label: "roomkit.scriptro.com",
   },
   {
     meta: "Repository · Python · 2026",
@@ -47,6 +48,14 @@ const repos = [
 
 const Home = () => {
   useHomeMotion();
+  useSeo({
+    title: "shad0wbitt — Software developer in Lahore, Pakistan",
+    description:
+      "Abdul Rehman (shad0wbitt) builds web applications and AI systems: FastAPI backends, React interfaces, RAG pipelines and MCP tool servers. Based in Lahore, working remotely.",
+    path: "/",
+    type: "profile",
+    jsonLd: homeSchema,
+  });
 
   return (
     <>
@@ -78,9 +87,10 @@ const Home = () => {
                 <img
                   className="hero-img"
                   src={profile.heroArt}
-                  alt=""
+                  alt="Purple abstract swirl artwork used as the site's theme image"
                   width={1200}
                   height={1200}
+                  fetchPriority="high"
                 />
                 <span className="hero-tint" />
               </span>

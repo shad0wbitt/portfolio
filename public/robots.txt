@@ -1,0 +1,8 @@
+# https://shad0wbitt.vercel.app
+User-agent: *
+Allow: /
+
+# An LLM-friendly summary of this site, its projects, and services:
+# https://shad0wbitt.vercel.app/llms.txt
+
+Sitemap: https://shad0wbitt.vercel.app/sitemap.xml

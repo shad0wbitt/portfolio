@@ -1,6 +1,7 @@
 import { Mail, MapPin } from "lucide-react";
 import CtaBand from "../components/CtaBand";
 import { profile, skills } from "../data/portfolio";
+import { useSeo } from "../lib/seo";
 
 const principles = [
   {
@@ -18,6 +19,14 @@ const principles = [
 ];
 
 const About = () => {
+  useSeo({
+    title: "About — Abdul Rehman, developer in Lahore | shad0wbitt",
+    description:
+      "Abdul Rehman (shad0wbitt) works across FastAPI, React, PostgreSQL and retrieval systems. Background, principles, stack and availability for freelance work.",
+    path: "/about",
+    type: "profile",
+  });
+
   return (
     <>
       <section className="page-head">
@@ -119,6 +128,7 @@ const About = () => {
           ))}
         </div>
 
+        <h2 className="sr-only">How I work</h2>
         <div className="principles">
           {principles.map((principle) => (
             <article className="principle" key={principle.title} data-reveal>
